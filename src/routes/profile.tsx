@@ -26,7 +26,7 @@ function ProfilePage() {
       <PageBanner
         title="My Candidate Profile"
         subtitle="Complete your profile once — then apply to any opening in a single click."
-        breadcrumb={["Home", "Careers", "Profile"]}
+        crumb="My Profile"
       />
       <div className="mx-auto max-w-5xl px-4 py-10">
         <RequireAuth>

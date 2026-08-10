@@ -40,7 +40,7 @@ function HRLogin() {
     });
     if (error) {
       setBusy(false);
-      return toast.error(error.message);
+      { toast.error(error.message); return; }
     }
     const { data: roles } = await supabase
       .from("user_roles")
@@ -50,7 +50,7 @@ function HRLogin() {
     setBusy(false);
     if (!isHR) {
       await supabase.auth.signOut();
-      return toast.error("This account does not have HR access.");
+      { toast.error("This account does not have HR access."); return; }
     }
     toast.success("Signed in to the HR portal");
     navigate({ to: "/hr" });

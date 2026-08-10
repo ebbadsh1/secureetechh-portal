@@ -56,7 +56,7 @@ function AuthPage() {
       password: loginPassword,
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Welcome back!");
     go();
   };
@@ -64,7 +64,7 @@ function AuthPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = signupSchema.safeParse({ fullName, email, password });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]!.message);
+    if (!parsed.success) { toast.error(parsed.error.issues[0]!.message); return; }
     setBusy(true);
     const { data, error } = await supabase.auth.signUp({
       email: parsed.data.email,
@@ -75,7 +75,7 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (!data.session) {
       toast.success("Account created. Check your email to confirm your address.");
       setMode("login");
@@ -86,11 +86,11 @@ function AuthPage() {
   };
 
   const handleReset = async () => {
-    if (!loginEmail.trim()) return toast.error("Enter your email address first");
+    if (!loginEmail.trim()) { toast.error("Enter your email address first"); return; }
     const { error } = await supabase.auth.resetPasswordForEmail(loginEmail.trim(), {
       redirectTo: `${window.location.origin}/reset-password`,
     });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Password reset link sent to your email");
   };
 

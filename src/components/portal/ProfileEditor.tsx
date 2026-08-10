@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { Loader2, Plus, Trash2, Download, Upload, Save } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -653,7 +653,7 @@ export function ProfileEditor({ onSaved }: { onSaved?: () => void }) {
   );
 }
 
-function Field({ label, children }: { label: string; children: ReactNodeLike }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
       <Label className="text-sm font-semibold text-navy">{label}</Label>
@@ -661,8 +661,6 @@ function Field({ label, children }: { label: string; children: ReactNodeLike }) 
     </div>
   );
 }
-
-type ReactNodeLike = React.ReactNode;
 
 function Repeatable<T>({
   title,
@@ -675,7 +673,7 @@ function Repeatable<T>({
   rows: T[];
   onAdd: () => void;
   onRemove: (index: number) => void;
-  render: (row: T, index: number) => ReactNodeLike;
+  render: (row: T, index: number) => ReactNode;
 }) {
   return (
     <div className="space-y-4">

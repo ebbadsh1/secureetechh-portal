@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CustomersRouteImport } from './routes/customers'
+import { Route as HrLoginRouteImport } from './routes/hr-login'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as PublicationsRouteImport } from './routes/publications'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as JobsIdRouteImport } from './routes/jobs.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersRoute = CustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HrLoginRoute = HrLoginRouteImport.update({
+  id: '/hr-login',
+  path: '/hr-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicationsRoute = PublicationsRouteImport.update({
+  id: '/publications',
+  path: '/publications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobsIdRoute = JobsIdRouteImport.update({
+  id: '/jobs/$id',
+  path: '/jobs/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/customers': typeof CustomersRoute
+  '/hr-login': typeof HrLoginRoute
+  '/products': typeof ProductsRoute
+  '/publications': typeof PublicationsRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/jobs/$id': typeof JobsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/customers': typeof CustomersRoute
+  '/hr-login': typeof HrLoginRoute
+  '/products': typeof ProductsRoute
+  '/publications': typeof PublicationsRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/jobs/$id': typeof JobsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/customers': typeof CustomersRoute
+  '/hr-login': typeof HrLoginRoute
+  '/products': typeof ProductsRoute
+  '/publications': typeof PublicationsRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/jobs/$id': typeof JobsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/careers'
+    | '/contact'
+    | '/customers'
+    | '/hr-login'
+    | '/products'
+    | '/publications'
+    | '/reset-password'
+    | '/jobs/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/careers'
+    | '/contact'
+    | '/customers'
+    | '/hr-login'
+    | '/products'
+    | '/publications'
+    | '/reset-password'
+    | '/jobs/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/careers'
+    | '/contact'
+    | '/customers'
+    | '/hr-login'
+    | '/products'
+    | '/publications'
+    | '/reset-password'
+    | '/jobs/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
+  CareersRoute: typeof CareersRoute
+  ContactRoute: typeof ContactRoute
+  CustomersRoute: typeof CustomersRoute
+  HrLoginRoute: typeof HrLoginRoute
+  ProductsRoute: typeof ProductsRoute
+  PublicationsRoute: typeof PublicationsRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  JobsIdRoute: typeof JobsIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +182,92 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers': {
+      id: '/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof CustomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hr-login': {
+      id: '/hr-login'
+      path: '/hr-login'
+      fullPath: '/hr-login'
+      preLoaderRoute: typeof HrLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/publications': {
+      id: '/publications'
+      path: '/publications'
+      fullPath: '/publications'
+      preLoaderRoute: typeof PublicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jobs/$id': {
+      id: '/jobs/$id'
+      path: '/jobs/$id'
+      fullPath: '/jobs/$id'
+      preLoaderRoute: typeof JobsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
+  CareersRoute: CareersRoute,
+  ContactRoute: ContactRoute,
+  CustomersRoute: CustomersRoute,
+  HrLoginRoute: HrLoginRoute,
+  ProductsRoute: ProductsRoute,
+  PublicationsRoute: PublicationsRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  JobsIdRoute: JobsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

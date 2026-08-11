@@ -29,6 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [roles, setRoles] = useState<AppRole[]>([]);
   const [loading, setLoading] = useState(true);
+  const [rolesReady, setRolesReady] = useState(false);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -36,15 +37,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const loadRoles = async (userId: string | undefined) => {
       if (!userId) {
-        if (active) setRoles([]);
+        if (active) {
+          setRoles([]);
+          setRolesReady(true);
+        }
         return;
       }
       const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
-      if (active) setRoles(((data ?? []) as { role: AppRole }[]).map((r) => r.role));
+      if (active) {
+        setRoles(((data ?? []) as { role: AppRole }[]).map((r) => r.role));
+        setRolesReady(true);
+      }
     };
 
     const { data: sub } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
+      setRolesReady(false);
       setTimeout(() => void loadRoles(newSession?.user?.id), 0);
     });
 
@@ -68,14 +76,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       roles,
       isHR: roles.includes("hr_admin") || roles.includes("hr_staff"),
       isAdmin: roles.includes("hr_admin"),
-      loading,
+      loading: loading || !rolesReady,
       signOut: async () => {
         await queryClient.cancelQueries();
         queryClient.clear();
         await supabase.auth.signOut();
       },
     }),
-    [session, roles, loading, queryClient],
+    [session, roles, loading, rolesReady, queryClient],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

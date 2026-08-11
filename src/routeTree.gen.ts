@@ -22,6 +22,11 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PublicationsRouteImport } from './routes/publications'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ApplyJobIdRouteImport } from './routes/apply.$jobId'
+import { Route as HrIndexRouteImport } from './routes/hr.index'
+import { Route as HrApplicationsRouteImport } from './routes/hr.applications'
+import { Route as HrCandidatesRouteImport } from './routes/hr.candidates'
+import { Route as HrJobsRouteImport } from './routes/hr.jobs'
+import { Route as HrReportsRouteImport } from './routes/hr.reports'
 import { Route as JobsIdRouteImport } from './routes/jobs.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -89,6 +94,31 @@ const ApplyJobIdRoute = ApplyJobIdRouteImport.update({
   path: '/apply/$jobId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HrIndexRoute = HrIndexRouteImport.update({
+  id: '/hr/',
+  path: '/hr/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HrApplicationsRoute = HrApplicationsRouteImport.update({
+  id: '/hr/applications',
+  path: '/hr/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HrCandidatesRoute = HrCandidatesRouteImport.update({
+  id: '/hr/candidates',
+  path: '/hr/candidates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HrJobsRoute = HrJobsRouteImport.update({
+  id: '/hr/jobs',
+  path: '/hr/jobs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HrReportsRoute = HrReportsRouteImport.update({
+  id: '/hr/reports',
+  path: '/hr/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JobsIdRoute = JobsIdRouteImport.update({
   id: '/jobs/$id',
   path: '/jobs/$id',
@@ -109,7 +139,12 @@ export interface FileRoutesByFullPath {
   '/publications': typeof PublicationsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/apply/$jobId': typeof ApplyJobIdRoute
+  '/hr/applications': typeof HrApplicationsRoute
+  '/hr/candidates': typeof HrCandidatesRoute
+  '/hr/jobs': typeof HrJobsRoute
+  '/hr/reports': typeof HrReportsRoute
   '/jobs/$id': typeof JobsIdRoute
+  '/hr/': typeof HrIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -125,7 +160,12 @@ export interface FileRoutesByTo {
   '/publications': typeof PublicationsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/apply/$jobId': typeof ApplyJobIdRoute
+  '/hr/applications': typeof HrApplicationsRoute
+  '/hr/candidates': typeof HrCandidatesRoute
+  '/hr/jobs': typeof HrJobsRoute
+  '/hr/reports': typeof HrReportsRoute
   '/jobs/$id': typeof JobsIdRoute
+  '/hr': typeof HrIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,7 +182,12 @@ export interface FileRoutesById {
   '/publications': typeof PublicationsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/apply/$jobId': typeof ApplyJobIdRoute
+  '/hr/applications': typeof HrApplicationsRoute
+  '/hr/candidates': typeof HrCandidatesRoute
+  '/hr/jobs': typeof HrJobsRoute
+  '/hr/reports': typeof HrReportsRoute
   '/jobs/$id': typeof JobsIdRoute
+  '/hr/': typeof HrIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,7 +205,12 @@ export interface FileRouteTypes {
     | '/publications'
     | '/reset-password'
     | '/apply/$jobId'
+    | '/hr/applications'
+    | '/hr/candidates'
+    | '/hr/jobs'
+    | '/hr/reports'
     | '/jobs/$id'
+    | '/hr/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -176,7 +226,12 @@ export interface FileRouteTypes {
     | '/publications'
     | '/reset-password'
     | '/apply/$jobId'
+    | '/hr/applications'
+    | '/hr/candidates'
+    | '/hr/jobs'
+    | '/hr/reports'
     | '/jobs/$id'
+    | '/hr'
   id:
     | '__root__'
     | '/'
@@ -192,7 +247,12 @@ export interface FileRouteTypes {
     | '/publications'
     | '/reset-password'
     | '/apply/$jobId'
+    | '/hr/applications'
+    | '/hr/candidates'
+    | '/hr/jobs'
+    | '/hr/reports'
     | '/jobs/$id'
+    | '/hr/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -209,7 +269,12 @@ export interface RootRouteChildren {
   PublicationsRoute: typeof PublicationsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ApplyJobIdRoute: typeof ApplyJobIdRoute
+  HrApplicationsRoute: typeof HrApplicationsRoute
+  HrCandidatesRoute: typeof HrCandidatesRoute
+  HrJobsRoute: typeof HrJobsRoute
+  HrReportsRoute: typeof HrReportsRoute
   JobsIdRoute: typeof JobsIdRoute
+  HrIndexRoute: typeof HrIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -305,6 +370,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplyJobIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hr/': {
+      id: '/hr/'
+      path: '/hr'
+      fullPath: '/hr/'
+      preLoaderRoute: typeof HrIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hr/applications': {
+      id: '/hr/applications'
+      path: '/hr/applications'
+      fullPath: '/hr/applications'
+      preLoaderRoute: typeof HrApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hr/candidates': {
+      id: '/hr/candidates'
+      path: '/hr/candidates'
+      fullPath: '/hr/candidates'
+      preLoaderRoute: typeof HrCandidatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hr/jobs': {
+      id: '/hr/jobs'
+      path: '/hr/jobs'
+      fullPath: '/hr/jobs'
+      preLoaderRoute: typeof HrJobsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hr/reports': {
+      id: '/hr/reports'
+      path: '/hr/reports'
+      fullPath: '/hr/reports'
+      preLoaderRoute: typeof HrReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/jobs/$id': {
       id: '/jobs/$id'
       path: '/jobs/$id'
@@ -329,7 +429,12 @@ const rootRouteChildren: RootRouteChildren = {
   PublicationsRoute: PublicationsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ApplyJobIdRoute: ApplyJobIdRoute,
+  HrApplicationsRoute: HrApplicationsRoute,
+  HrCandidatesRoute: HrCandidatesRoute,
+  HrJobsRoute: HrJobsRoute,
+  HrReportsRoute: HrReportsRoute,
   JobsIdRoute: JobsIdRoute,
+  HrIndexRoute: HrIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

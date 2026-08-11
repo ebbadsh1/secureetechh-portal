@@ -25,7 +25,7 @@ export const Route = createFileRoute("/hr/reports")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: HRReports;
+  component: HRReports,
 });
 
 function HRReports() {

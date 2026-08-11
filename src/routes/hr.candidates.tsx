@@ -35,7 +35,9 @@ export const Route = createFileRoute("/hr/candidates")({
   component: HRCandidates,
 });
 
-type Row = Record<string, any>;
+import type { Candidate } from "@/lib/candidate";
+
+type Row = Candidate;
 
 const flatten = (obj: Record<string, string[]> | null | undefined) =>
   Object.values(obj ?? {}).flat().filter(Boolean);
@@ -61,7 +63,7 @@ function HRCandidates() {
         supabase.from("jobs").select("id,title"),
       ]);
       return {
-        candidates: (cands.data ?? []) as Row[],
+        candidates: (cands.data ?? []) as unknown as Row[],
         edu: edu.data ?? [],
         exp: exp.data ?? [],
         docs: docs.data ?? [],
@@ -285,7 +287,7 @@ function HRCandidates() {
                   ].map(([k, v]) => (
                     <div key={k as string}>
                       <dt className="text-xs text-muted-foreground">{k}</dt>
-                      <dd className="font-medium">{(v as string | number) ?? "—" || "—"}</dd>
+                      <dd className="font-medium">{(v as string | number) || "—"}</dd>
                     </div>
                   ))}
                 </dl>

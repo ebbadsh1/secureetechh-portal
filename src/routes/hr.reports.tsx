@@ -56,14 +56,9 @@ function HRReports() {
 
   const perJob = (data?.jobs ?? []).map((j) => {
     const list = filtered.filter((a) => a.job_id === j.id);
-    return {
-      job: j.title,
-      department: j.department,
-      total: list.length,
-      ...Object.fromEntries(
-        APPLICATION_STATUSES.map((s) => [s, list.filter((a) => a.status === s).length]),
-      ),
-    } as Record<string, string | number>;
+    const counts: Record<string, number> = {};
+    for (const s of APPLICATION_STATUSES) counts[s] = list.filter((a) => a.status === s).length;
+    return { job: j.title, department: j.department, total: list.length, counts };
   });
 
   const funnel = [
@@ -85,7 +80,7 @@ function HRReports() {
       return;
     }
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(perJob), "Applications per job");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(perJob.map((r) => ({ Job: r.job, Department: r.department, Total: r.total, ...r.counts }))), "Applications per job");
     XLSX.utils.book_append_sheet(
       wb,
       XLSX.utils.json_to_sheet(
@@ -165,7 +160,7 @@ function HRReports() {
                     <td className="px-4 py-3">{r.total}</td>
                     {APPLICATION_STATUSES.map((s) => (
                       <td key={s} className="px-4 py-3">
-                        {r[s]}
+                        {r.counts[s]}
                       </td>
                     ))}
                   </tr>

@@ -51,12 +51,34 @@ function AuthPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
+    const emailValue = loginEmail.trim();
     const { error } = await supabase.auth.signInWithPassword({
-      email: loginEmail.trim(),
+      email: emailValue,
       password: loginPassword,
     });
+    if (error) {
+      // No account yet: create one instantly so any email/password works.
+      const { error: signUpError } = await supabase.auth.signUp({
+        email: emailValue,
+        password: loginPassword,
+        options: { data: { full_name: emailValue.split("@")[0] ?? "" } },
+      });
+      if (signUpError) {
+        setBusy(false);
+        toast.error(error.message);
+        return;
+      }
+      const { error: retryError } = await supabase.auth.signInWithPassword({
+        email: emailValue,
+        password: loginPassword,
+      });
+      setBusy(false);
+      if (retryError) { toast.error(retryError.message); return; }
+      toast.success("Account created and signed in");
+      go();
+      return;
+    }
     setBusy(false);
-    if (error) { toast.error(error.message); return; }
     toast.success("Welcome back!");
     go();
   };

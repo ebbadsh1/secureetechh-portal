@@ -80,14 +80,6 @@ function ApplyForm() {
 
   const submit = async () => {
     if (!user || !job) return;
-    if (!profileReady) {
-      toast.error("Please complete your profile (name and contact number) first.");
-      return;
-    }
-    if (!hasResume) {
-      toast.error("Please upload your resume in the Documents step of your profile.");
-      return;
-    }
     setSubmitting(true);
     const { error } = await supabase.from("applications").insert({
       job_id: job.id,

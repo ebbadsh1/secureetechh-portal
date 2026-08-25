@@ -115,7 +115,7 @@ function JobDetailPage() {
                 <Link
                   to={user ? "/apply/$jobId" : "/auth"}
                   params={{ jobId: job.id }}
-                  search={user ? undefined : { redirect: `/apply/${job.id}` }}
+                  search={user ? {} : { redirect: `/apply/${job.id}` }}
                   className="mt-5 inline-block rounded-full bg-brand px-8 py-3 font-bold text-white transition-opacity hover:opacity-90"
                 >
                   Apply Now
